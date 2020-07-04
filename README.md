@@ -9,7 +9,7 @@ $ cd themes
 $ git clone git@github.com:funkeyfreak/casper4.git
 ```
 
-Either set the theme in your config to `casper3` or build with the `-t casper3` flag.
+Either set the theme in your config to `casper4` or build with the `-t casper4` flag.
 
 ## Using the theme
 
