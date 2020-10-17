@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
 <head>
+    {{ if $.Site.Params.icon }} <link rel="icon" type="image/png" href="{{ $.Site.Params.icon }}"> {{ end }}
+    {{ if $.Site.Params.iconAppleTouch }} <link rel="icon" type="image/png" href="{{ $.Site.Params.iconAppleTouch }}"> {{ end }}
+    {{ if $.Site.Params.icon32 }} <link rel="icon" type="image/png" sizes="32x32" href="{{ $.Site.Params.icon32 }}"> {{ end }}
+    {{ if $.Site.Params.icon16 }} <link rel="icon" type="image/png" sizes="16x16" href="{{ $.Site.Params.icon16 }}"> {{ end }}
+    {{ if $.Site.Params.iconManifest}} <link rel="manifest" href="{{ $.Site.Params.iconManifest }}"> {{ end }}
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
@@ -20,7 +25,6 @@
     <div class="site-wrapper">
         {{- block "main" . }}{{- end }}
 
-
         <footer class="site-footer outer">
             <div class="site-footer-content inner">
                 <section class="copyright"><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a> &copy; {{ .Date.Format "2006" }}</section>
@@ -29,7 +33,8 @@
                     {{ if .Site.Params.facebook }}<a href="{{ .Site.Params.facebook }}" target="_blank" rel="noopener">Facebook</a>{{ end }}
                     {{ if .Site.Params.twitter }}<a href="{{ .Site.Params.twitter }}" target="_blank" rel="noopener">Twitter</a>{{ end }}
                     {{ if .Site.Params.github }}<a href="{{ .Site.Params.github }}" target="_blank" rel="noopener">Github</a>{{ end }}
-                    <a href="https://dalinwilliams.com" target="_blank" rel="noopener" style="opacity: 0.5;">Hugo Casper4 by Dalin Williams</a>
+                    {{ if .Site.Params.linkedin }}<a href="{{ .Site.Params.github }}" target="_blank" rel="noopener">LinkedIn</a>{{ end }}
+                    <a href="{{ .Site.Params.rootURL }}" target="_blank" rel="noopener" style="opacity: 0.5;">Hugo Casper4 by Dalin Williams</a>
                 </nav>
             </div>
         </footer>

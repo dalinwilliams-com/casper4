@@ -13,14 +13,18 @@
 
             <header class="post-full-header">
 
+                <h1 class="post-full-title">{{ .Title }}</h1>
+
                 {{ with .Params.tags }}
                     {{ $primaryTag := (index . 0) }}
                     <section class="post-full-tags">
-                        <a href="{{ "/tags/" | relLangURL }}{{ $primaryTag | urlize }}">{{ $primaryTag }}</a>
+                        <b> <a href="{{ "/tags/" | relLangURL }}{{ $primaryTag | urlize }}">{{ $primaryTag }}</a></b>
+                        {{ range after 1 . }}
+                        <span class="bull">&bull;</span>
+                        <a href="{{ "/tags/" | relLangURL }}{{ $primaryTag | urlize }}">{{ . }}</a>
+                        {{ end }}
                     </section>
                 {{ end }}
-
-                <h1 class="post-full-title">{{ .Title }}</h1>
 
                 {{ if .Param "summary" }}
                     <p class="post-full-custom-excerpt">{{ .Summary }}</p>
@@ -40,6 +44,7 @@
                             <div class="byline-meta-content">
                                 {{ if eq (.Param "date-block") false }} {{ else }}
                                 <time class="byline-meta-date" datetime="{{.Date.Format "2006-31-01"}}">{{.Date.Format "2 January 2006"}}</time>
+                                <span class="bull">&bull;</span> <span class="bull">{{ .FuzzyWordCount }} words</span>
                                 <span class="byline-reading-time"><span class="bull">&bull;</span> {{ .ReadingTime }} min read</span>
                                 {{ end }}
                             </div>
@@ -68,6 +73,8 @@
     </div>
 </main>
 
+{{ .Scratch.Set "current-url" .Permalink }}
 {{- partial "post-navigation.html" . -}}
+{{ .Scratch.Delete "current-url" }}
 
 {{ end }}

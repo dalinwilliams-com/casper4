@@ -1,0 +1,25 @@
+<header class="site-header">
+    {{- partial "site-header.html" $ -}}
+
+    {{ .Scratch.Set "background" .Params.feature_image }}
+
+    {{- partial "header-background.html" $ -}}
+    <div class="inner site-header-content">
+        {{- /*
+            <!--{{ if and (.Param "description") (or (.IsHome) (not (eq .Kind "taxonomy"))) }}
+                {{ .Param "description" }}
+            {{ else if (or (eq .Kind "taxonomy") (eq .Title "Tags")) }}
+                {{ .Name }}
+                {{ .Param "description" }}-->*/ -}}
+        <h1 class="site-title">{{ .Title }}</h1>
+        <h2 class="site-description">
+            {{ if .Param "description" }}
+                {{ .Param "description" }}
+            {{ else }}
+                {{ len .Pages }} item{{ if gt (len .Pages) 1 }}s{{ end }} have been found under the {{ .Data.Singular }} named {{ .Title }}
+            {{ end }}
+        </h2>
+        {{ .Data.Count }}
+
+    </div>
+</header>

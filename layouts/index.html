@@ -1,7 +1,6 @@
 {{ define "body_class" }} home-template {{ end }}
 
 {{ define "main" }}
-
 <header class="site-home-header">
     {{ .Scratch.Set "background" .Params.feature_image }}
     {{- partial "header-background.html" . -}}
@@ -16,21 +15,26 @@
                     {{ end }}
                 </h1>
                 <h2 class="site-description">{{ $.Site.Params.description }}</h2>
-
             </div>
         </div>
     </div>
 </header>
 
 <main id="site-main" class="site-main outer">
+    {{ $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+            {{ if (eq (len $pages) 0) }}
+            <header class="post-card-header">
+                <h1 class="site-title"> Great things are coming 👨🏾‍💻 </h1>
+            </header>
+            {{ else }}
     <div class="inner posts">
         <div class="post-feed">
-            {{ $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
             {{ range $index, $element := $pages }}
                 {{- partial "post-card.html" (dict "context" . "index" $index "home" $.IsHome) -}}
             {{ end }}
         </div>
     </div>
+    {{ end }}
 </main>
 
 {{ end }}
